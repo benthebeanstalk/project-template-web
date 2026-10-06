@@ -1,0 +1,3 @@
+@import "tailwindcss";
+/* Layered so Tailwind size utilities (text-4xl) override the package's 24px default. */
+@import "material-symbols/outlined.css" layer(components);

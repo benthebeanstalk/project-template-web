@@ -1,0 +1,33 @@
+# The pre-push hooks run `just lint` and `just test` before a push. They are a courtesy to the author, NOT a gate:
+# `git push --no-verify` skips them, and CI stays the gate. `pre-commit install` installs both hook types.
+default_install_hook_types: [pre-commit, pre-push]
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-added-large-files
+      - id: detect-private-key
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.10
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+  - repo: local
+    hooks:
+      - id: just-lint
+        name: just lint-quiet (pre-push, not a gate)
+        entry: just lint-quiet
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]
+      - id: just-test
+        name: just test-quiet (pre-push, not a gate)
+        entry: just test-quiet
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]

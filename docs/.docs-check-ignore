@@ -1,0 +1,2 @@
+# Allow-list for scripts/docs_check.py (see the script header).
+placeholders: allowed   # this is a template: <name> is meant to stay
