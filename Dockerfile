@@ -8,7 +8,7 @@ COPY frontend/ ./
 RUN pnpm build
 
 # Stage 2: API plus built frontend
-FROM python:3.12-slim
+FROM python:3.15-slim
 COPY --from=ghcr.io/astral-sh/uv:0.12 /uv /usr/local/bin/uv
 WORKDIR /app
 COPY pyproject.toml uv.lock ./
